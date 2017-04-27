@@ -66,7 +66,7 @@ def build_cache():
         if link.get("onclick") is not None:
             # Evaluate the obfuscation javascript, store the result (squirreled away within location.href) into url
             context.execute(link.get("onclick").split("javascript:")[-1])
-            url = context.location.href
+            url = MAIN_URL + context.location.href
 
             # Details = [package, version, pyversion, --, arch]
             details = url.split("/")[-1].split("-")
