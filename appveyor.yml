@@ -19,6 +19,8 @@ environment:
 install:
   - "%PYTHON%\\python.exe -m pip install -r requirements.txt"
 
+build: off
+
 test_script:
   - "%PYTHON%\\python.exe setup.py install"
   - "%PYTHON%\\Scripts\\pipwin.exe search babel"
