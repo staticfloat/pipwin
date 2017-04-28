@@ -25,4 +25,4 @@ test_script:
   - "%PYTHON%\\python.exe setup.py install"
   - "%PYTHON%\\Scripts\\pipwin.exe search babel"
   - "%PYTHON%\\Scripts\\pipwin.exe install babel>=2.0"
-  - "%PYTHON%\\Scripts\\pipwin.exe uninstall babel"
+  - "echo y | %PYTHON%\\Scripts\\pipwin.exe uninstall babel"
