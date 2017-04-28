@@ -12,7 +12,7 @@ with open("README.rst") as readme_file:
 requirements = [
     "argparse",
     "requests",
-    "robobrowser",
+    "beautifulsoup4",
     "pyprind",
     "six",
     "js2py",

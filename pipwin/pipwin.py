@@ -2,7 +2,8 @@
 
 import pip
 import requests
-from robobrowser import RoboBrowser
+from bs4 import BeautifulSoup
+import requests
 from os.path import expanduser, join, isfile, exists
 import os
 import json
@@ -45,20 +46,23 @@ def build_cache():
 
     data = {}
 
-    soup = RoboBrowser()
-    soup.open(MAIN_URL)
+    html = requests.get(MAIN_URL).text
+    soup = BeautifulSoup(html)
 
     # We mock out a little javascript environment within which to run Gohlke's obfuscation code
     context = js2py.EvalJs()
     context.execute("""
-    top = {location: {href: ''}};
-    location = {href: ''};
-    function setTimeout(f, t) {
-        f();
-    };
+        top = {location: {href: ''}};
+        location = {href: ''};
+        function setTimeout(f, t) {
+            f();
+        };
     """)
 
     # We grab Gohlke's code and evaluate it within py2js
+    if soup.find("script") is None:
+        print(html)
+        raise ValueError("ERROR: Could not find <script> tag in html document!")
     context.execute(soup.find("script").text)
 
     links = soup.find(class_="pylibs").find_all("a")

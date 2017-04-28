@@ -1,6 +1,6 @@
 wheel
 argparse
-robobrowser
+beautifulsoup4
 requests
 pyprind
 six
